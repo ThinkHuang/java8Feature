@@ -20,12 +20,11 @@ public class LogicDemo
         System.out.println("---------------------------");
         
         //The new from before java 8
-        //À¨ºÅÖĞµÄÊÇĞÎÊ½²ÎÊı£¬µ±²ÎÊıÖ»ÓĞÒ»¸öÊ±£¬¿ÉÒÔÊ¹ÓÃÀ¨ºÅ£¬Ò²¿ÉÒÔ²»Ê¹ÓÃÀ¨ºÅ
         list.forEach((n) -> System.out.println(n));
         
         System.out.println("---------------------------");
         
-        //Ê¹ÓÃ·½·¨ÒıÓÃ::½øĞĞ±êÊ¶
+        //é‡‡ç”¨æ–¹æ³•å¼•ç”¨ï¼Œä¸èƒ½å¯¹åŸŸå†…å¯¹è±¡åšä¿®æ”¹æ‰èƒ½ä½¿ç”¨è¿™ç§æ–¹å¼
         list.forEach(System.out :: println);
     }
 }

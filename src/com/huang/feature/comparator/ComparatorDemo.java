@@ -51,7 +51,7 @@ public class ComparatorDemo
         List<Integer> intList = Arrays.asList(111,222,333,444);
         Collections.sort(intList, (Integer i, Integer j) -> i.compareTo(j));
         
-        //сиио©иж╙ё╛ж╩р╙й╣ожакComparable╫с©з╤╪©иртй╧сцуБжж╥╫й╫
+        //Г■╠Д╦┼Е▐╞Д╩╔Е╬≈Е┤╨Д╦─Д╦╙Ф▌╗Ф╣▀Ф─╖Г╩⌠Х╝╨О╪▄Е▐╙Х╕│Ф≤╞Е╝·Г▌╟Д╨├ComparableФ▌╔Е▐ёИ┐╫Е▐╞Д╩╔Д╫©Г■╗Х╞╔Г╖█Ф√╧Е╪▐
         
     }
 }

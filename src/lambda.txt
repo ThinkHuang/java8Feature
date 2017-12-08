@@ -1,0 +1,19 @@
+使用lambda的要素：
+1、使用lambda表达式时，需要确认该类型是否是lambda的目标类型。预先使用定义了一个抽象方法的类型，例如Runnable，Callable和Comparable接口
+也可以使用能够接受java.util.function中声明的接口的方法也是能够使用lambda表达式的，例如Function，Customer，Supplier和Predicate
+2、lambda表达式中可以使用方法引用，当且仅当该方法不会修改lambda表达式传入的参数时方可使用，否则由于不能使用“索引”定位，导致不能拿到具体的对象(有点像Iterator)
+list.forEach(n -> System.out.println(n)); 
+list.forEach(System.out::println);  // 使用方法引用
+3、lambda内部可以使用静态，非静态和局部变量，还可以使用final修饰的变量
+4、lambda不能修改域外对象(这点参考匿名内部类，引用外部变量时只能让外部变量成为final类型)
+List<Integer> primes = Arrays.asList(new Integer[]{2, 3,5,7});
+int factor = 2;
+primes.forEach(element -> { factor++; });
+Compile time error : "local variables referenced from a lambda expression must be final or effectively final"
+5、stream的操作分为两种类型：intermediate和terminal
+intermediate属于中间过程，在这种操作流程中，流不会进行迭代，只是对流程进行整合
+包含在intermediate中的操作为：map (mapToInt, flatMap 等)、 filter、 distinct、 sorted、 peek、 limit、 skip、 parallel、 sequential、 unordered
+terminal属于最后的操作，在该种操作结束后，流就消失了，不能在处理这个流了
+包含在terminal中的操作为：forEach、 forEachOrdered、 toArray、 reduce、 collect、 min、 max、 count、 anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 iterator
+6、还有一种比较特殊的情况short-circuiting（这种操作针对infinite/unbounded资源）
+包含的操作有：anyMatch、 allMatch、 noneMatch、 findFirst、 findAny、 limit

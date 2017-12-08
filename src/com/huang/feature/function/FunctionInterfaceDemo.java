@@ -7,7 +7,7 @@ import java.util.function.Predicate;
 import org.junit.Test;
 
 /**
- * º¯ÊıÊ½½Ó¿Ú±à³Ì
+ * å‡½æ•°å¼æ¥å£ç¼–ç¨‹
  * @author huangyejun
  *         
  */
@@ -21,7 +21,7 @@ public class FunctionInterfaceDemo
 //        filter(list, (str) -> str.startsWith("J"));
 
 //        System.out.println("print all languages:");
-//        filter(list, (str) -> true);// ÎÒ²Â²âÒâË¼¾ÍÊÇstr²»Îª¿Õ
+//        filter(list, (str) -> true);// 
 
 //        System.out.println("print no language:");
 //        filter(list, (str) -> false);
@@ -30,16 +30,16 @@ public class FunctionInterfaceDemo
 //        filter(list, (str) -> str.length() > 4);
         
         System.out.println("-----------------------------");
-        // Í¬Ê±±íÊ¾¸Ã×Ö·ûÒÔJ¿ªÍ·£¬²¢ÇÒ³¤¶È´óÓÚµÈÓÚ4
+        //ä½¿ç”¨ç»„åˆæ¨¡å¼æ„å»ºPredicateæµç¨‹
         Predicate<String> startsWithJ = (str) -> str.startsWith("J");
         Predicate<String> gt4 = (str) -> str.length() == 4;
-        // ¿ªÊ¼ÒÔÁ÷µÄĞÎÊ½½«predicate¼ÓÈë
-        list.stream().filter(startsWithJ.and(gt4));//£¿£¿£¿ÎªÊ²Ã´Õâ¾ä»°Ã»ÓĞ´òÓ¡³öÀ´
+        // è·å–é›†åˆæµåå°†PredicateåŠ å…¥
+        list.stream().filter(startsWithJ.and(gt4));//è¿™ç§æ–¹å¼ä¸ºä»€ä¹ˆæ²¡æœ‰è¿›è¡Œæ‰“å°ï¼Ÿå› ä¸ºstreamæœ¬èº«åŒ…å«ä¸€ä¸ªfilteræ–¹æ³•ï¼Œä¸åœ¨èµ°ä¸‹é¢å®šä¹‰çš„filteræ–¹æ³•äº†
         list.stream().filter(startsWithJ.and(gt4)).forEach(n -> System.out.println("nName, which starts with 'J' and four letter long is : " + n));
         
     }
     
-    // ¾­¹ı²âÊÔ·¢ÏÖ£¬Èç¹ûÔÚPredicateÉÏ²»¼ÓÈë·ºĞÍµÄ»°£¬ÉÏÊöµÄµ÷ÓÃ¾Í²»»áÍ¨¹ı±àÒëÆ÷µÄ¼ì²é
+    // é€šè¿‡æµ‹è¯•ï¼Œå‘ç°Predicateå¦‚æœä¸åŠ å…¥æ³›å‹ï¼Œå°†ä¼šå¯¼è‡´ç¼–è¯‘ä¸é€šè¿‡
     public void filter(List<String> names, Predicate<String> condition)
     {
         for (String name : names)
