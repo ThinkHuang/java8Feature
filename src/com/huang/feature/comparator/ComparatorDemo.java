@@ -52,6 +52,6 @@ public class ComparatorDemo
         Collections.sort(intList, (Integer i, Integer j) -> i.compareTo(j));
         
         //由上可以得出一个推测性结论，只要是实现了Comparable接口都可以使用该种方式
-        
     }
+    
 }

@@ -5,8 +5,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.IntSummaryStatistics;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -116,5 +120,57 @@ public class CollectionDemo
         stream.flatMap(line -> Stream.of(line.split(REGEXP))).
         filter(o -> o.length() > 0).
         collect(Collectors.toList());
+    }
+    
+    @Test
+    public void test7() {
+        List<String> list = Arrays.asList("peter", "anna", "mike", "xenia");
+        
+        Collections.sort(list, new Comparator<String>() {
+
+            @Override
+            public int compare(String o1, String o2)
+            {
+                return o1.compareTo(o2);
+            }
+        });
+        
+        Collections.sort(list, (String a, String b) -> {
+            return a.compareTo(b);
+        });
+        
+        Collections.sort(list, (a, b) -> a.compareTo(b));
+    }
+    
+    @Test
+    public void test8() {
+        Map<Integer, String> map = new HashMap<>();
+        for (int i = 0; i < 10; i++)
+        {
+            map.putIfAbsent(i, "val" + i);
+        }
+        //map.forEach((id, val) -> System.out.println(id + ":" + val));
+        
+        map.computeIfPresent(3, (num, val) -> val + num);
+        //System.out.println(map.get(3));
+        
+        map.computeIfPresent(9, (num, val) -> null);
+        //System.out.println(map.get(9));
+        
+        map.computeIfAbsent(23, num -> "val" + num);
+        //System.out.println(map.get(23));
+        
+        map.computeIfAbsent(3, num -> "bam");
+        //System.out.println(map.get(3));
+        
+        map.remove(3, "val3");
+       // System.out.println(map.get(3));
+        
+        map.remove(3, "val33");//要移除的对象是给定的value时才移除
+        //System.out.println(map.get(3));
+        
+        //合并操作先看map中是否没有特定的key/value存在，如果是，则把key/value存入map，否则merge函数就会被调用，对现有的数值进行修改
+        map.merge(9, "concat", (value, newValue) -> value.concat(newValue));
+        System.out.println(map.get(9));
     }
 }
