@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
@@ -172,5 +173,20 @@ public class CollectionDemo
         //合并操作先看map中是否没有特定的key/value存在，如果是，则把key/value存入map，否则merge函数就会被调用，对现有的数值进行修改
         map.merge(9, "concat", (value, newValue) -> value.concat(newValue));
         System.out.println(map.get(9));
+    }
+    
+    /**
+     * 使用stream进行并行执行
+     */
+    @Test
+    public void test9()
+    {
+        List<String> functionIds = new ArrayList<>(Arrays.asList("1","2","3","4","5"));
+        
+        List<String> subFunctionIds = new ArrayList<>(Arrays.asList("1","2","5","6","7"));
+        subFunctionIds
+        .stream()
+        .filter(functionId -> !functionIds.contains(functionId))
+        .forEach(System.out :: println);
     }
 }
