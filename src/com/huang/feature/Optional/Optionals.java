@@ -16,6 +16,6 @@ public class Optionals
         System.out.println(optional.get());
         System.out.println(optional.orElse("fallback"));//为空返回fallback
         
-        optional.ifPresent((s) -> System.out.println(s.charAt(0)));
+        optional.ifPresent(s -> System.out.println(s.charAt(0)));
     }
 }
