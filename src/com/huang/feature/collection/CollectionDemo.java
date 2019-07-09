@@ -52,7 +52,7 @@ public class CollectionDemo
         System.out.println("total : " + total);
         
         // The new from after java 8
-        double bill = costBeforeTax.stream().mapToDouble((o) -> o + o * 0.12).reduce((sum, o) -> sum + o).getAsDouble();
+        double bill = costBeforeTax.stream().mapToDouble(o -> o + o * 0.12).reduce((sum, o) -> sum + o).getAsDouble();
         System.out.println("bill:" + bill);
     }
     
@@ -70,7 +70,7 @@ public class CollectionDemo
     public void test3()
     {
         List<Integer> list = Arrays.asList(9, 10, 3, 4, 7, 3, 4);
-        Stream<Integer> stream = list.stream().map((i) -> i *i).distinct();
+        Stream<Integer> stream = list.stream().map(i -> i * i).distinct();
         List<Integer> distinct = stream.collect(Collectors.toList());
         
         System.out.printf("the origin list %s, the distincted list %s", list, distinct);
@@ -188,5 +188,16 @@ public class CollectionDemo
         .stream()
         .filter(functionId -> !functionIds.contains(functionId))
         .forEach(System.out :: println);
+    }
+    
+    @Test
+    public void test10()
+    {
+        List<String> functionIds = new ArrayList<>(Arrays.asList("1","2","3","4","5"));
+        String targetId = "4";
+        if(functionIds.parallelStream().anyMatch(id -> id.equals(targetId)))
+        {
+            System.out.println(targetId);
+        }
     }
 }
