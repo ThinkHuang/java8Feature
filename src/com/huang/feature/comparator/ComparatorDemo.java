@@ -50,7 +50,8 @@ public class ComparatorDemo
         Collections.sort(list, (String str1, String str2) -> str1.compareTo(str2));
         List<Integer> intList = Arrays.asList(111,222,333,444);
         Collections.sort(intList, (Integer i, Integer j) -> i.compareTo(j));
-        
+        // 类型省略
+        Collections.sort(intList, (i, j) -> i.compareTo(j));
         //由上可以得出一个推测性结论，只要是实现了Comparable接口都可以使用该种方式
     }
     

@@ -8,6 +8,10 @@ import java.util.concurrent.RecursiveAction;
 
 public class CustomRecursiveAction extends RecursiveAction
 {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = -1322026003927367784L;
     private String workload = "";
     private static final int THRESHOLD = 4;
  

@@ -11,6 +11,11 @@ import java.util.concurrent.RecursiveTask;
 public class CustomeRecursiveTask extends RecursiveTask<Integer>
 {
     
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 4624333004053651118L;
+
     private int[] arr;
     
     private static final int THRESHOLD = 20;
