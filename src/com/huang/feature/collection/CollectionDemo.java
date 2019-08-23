@@ -12,10 +12,15 @@ import java.util.HashMap;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.Test;
+import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
+
 
 public class CollectionDemo
 {
@@ -199,5 +204,47 @@ public class CollectionDemo
         {
             System.out.println(targetId);
         }
+    }
+    
+    @Test()
+    public void test11()
+    {
+        Map<String, Object> map = new TreeMap<>();
+        map.put("1", 1);
+        map.put("3", "2");
+        map.put("2", 5);
+        for(Map.Entry<String, Object> entry : map.entrySet())
+        {
+            System.out.println("key:" + entry.getKey() + " value:" + entry.getValue());
+        }
+    }
+    
+    @Test
+    public void test12() {
+        Set<String> set = new CopyOnWriteArraySet<>();
+        List<String> officeIds = Arrays.asList("0,cd44eff5283b4321b2ac5cb7df4387fd,0da59645a72c4f52b0e012ee0958a30f",
+                "0,05d8e9a3167e4c27ac08152cc0103b75,b8d5c7bd30a04c97b8a68547ccc0f5fd,",
+                "0,05d8e9a3167e4c27ac08152cc0103b75,b8d5c7bd30a04c97b8a68547ccc0f5fd,031453221e124b9fa2e3b8fc9bb4688e,");
+        List<String> pureOfficeIds = officeIds.stream().filter(id -> !"0,".equals(id)).map(id -> id.substring(2)).collect(Collectors.toList());
+        pureOfficeIds.parallelStream().forEach(parentOfficeId -> {
+            String[] ids = parentOfficeId.split(",");
+            set.addAll(Arrays.asList(ids));
+        });
+        System.out.println(set);
+    }
+    
+    @Test
+    public void test13() {
+        List<String> functionIds = new ArrayList<>(Arrays.asList("1","2","3","4","5"));
+        List<String> newFunctionIds = functionIds.parallelStream().filter(id -> "1".equals(id)).collect(Collectors.toList());
+        System.out.print(newFunctionIds);
+    }
+    
+    @Test
+    public void test14() {
+        List<String> functionIds = new ArrayList<>(Arrays.asList("1","2","3","4","5"));
+        // findFirst findAny等方法必须和过滤器一起使用
+        String target = functionIds.stream().filter(id -> id.equals("1")).findFirst().get();
+        System.out.println(target);
     }
 }
