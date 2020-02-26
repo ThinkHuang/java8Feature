@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.Test;
-import org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
 
 
 public class CollectionDemo
@@ -75,7 +74,8 @@ public class CollectionDemo
     public void test3()
     {
         List<Integer> list = Arrays.asList(9, 10, 3, 4, 7, 3, 4);
-        Stream<Integer> stream = list.stream().map(i -> i * i).distinct();
+//        Stream<Integer> stream = list.stream().map(i -> i * i).distinct();
+        Stream<Integer> stream = list.stream().distinct();
         List<Integer> distinct = stream.collect(Collectors.toList());
         
         System.out.printf("the origin list %s, the distincted list %s", list, distinct);
@@ -101,9 +101,10 @@ public class CollectionDemo
             Arrays.asList(2, 3),
             Arrays.asList(4, 5, 6)
         );
-        
-        Stream<Integer> outstream = inputstream.flatMap(childlist -> childlist.stream());
-        System.out.printf("outstream : %s", outstream.collect(Collectors.toList()));
+        // toArray()是终止流状态的操作，隐藏，该操作在执行完之后不能重新再对流进行操作。
+        System.out.printf("after outstream : %s", inputstream.toArray());
+//        Stream<Integer> outstream = inputstream.flatMap(childlist -> childlist.stream());
+//        System.out.printf("outstream : %s", outstream.collect(Collectors.toList()));
     }
     
     //获取数组中的偶数位置上的数据重新组成新的数组
@@ -188,11 +189,12 @@ public class CollectionDemo
     {
         List<String> functionIds = new ArrayList<>(Arrays.asList("1","2","3","4","5"));
         
-        List<String> subFunctionIds = new ArrayList<>(Arrays.asList("1","2","5","6","7"));
-        subFunctionIds
+        List<String> subFunctionIds = new ArrayList<>(Arrays.asList("5","6","7"));
+        functionIds = functionIds
         .stream()
-        .filter(functionId -> !functionIds.contains(functionId))
-        .forEach(System.out :: println);
+        .filter(functionId -> !subFunctionIds.contains(functionId))
+        .collect(Collectors.toList());
+        System.out.print(functionIds);
     }
     
     @Test
