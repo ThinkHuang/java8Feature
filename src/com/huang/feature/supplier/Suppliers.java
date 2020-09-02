@@ -15,5 +15,10 @@ public class Suppliers
     {
         Supplier<Person> supplier = Person :: new;
         Person person = supplier.get();
+        
+        Supplier<Runnable> c = () -> () -> {System.out.println("hi");};
+        c.get().run();
+        
+        Object o = (Runnable)() -> {System.out.println("hi");};
     }
 }
