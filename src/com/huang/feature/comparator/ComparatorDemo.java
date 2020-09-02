@@ -2,10 +2,14 @@ package com.huang.feature.comparator;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+
+// 使用静态导入
+import static java.util.Comparator.comparing;
 
 import javax.swing.JButton;
 
@@ -53,6 +57,20 @@ public class ComparatorDemo
         // 类型省略
         Collections.sort(intList, (i, j) -> i.compareTo(j));
         //由上可以得出一个推测性结论，只要是实现了Comparable接口都可以使用该种方式
+        
+        List<ComparatorDemo.Person> people = new ArrayList<>();
+        Collections.sort(people, comparing((Person p) -> p.getName()));
+        people.sort(comparing(p -> p.getName()));
+    }
+    
+    
+    private class Person {
+        
+        private String name;
+        
+        public String getName() {
+            return name;
+        }
     }
     
 }
